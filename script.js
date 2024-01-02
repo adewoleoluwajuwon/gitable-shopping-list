@@ -70,6 +70,37 @@ function clearItems(e) {
     checkUi();
 }
 
+function filterItems(e) {
+    const items = itemList.querySelectorAll('li');
+    const text = e.target.value.toLowerCase();
+
+    items.forEach(item => {
+        const itemName = item.textContent.toLowerCase();
+
+        // Check if the item text includes the new input
+        if (itemName.includes(text)) {
+            // If the item text includes the input, show the item
+            item.style.display = 'flex';
+        } else {
+            // If not, hide the item
+            item.style.display = 'none';
+        }        
+    });
+
+    //OR
+
+    // items.forEach(item => {
+    //     const itemName = item.firstChild.textContent.toLowerCase();
+
+    //     if(itemName.indexOf(text) != -1) {
+    //         item.style.display = 'flex';
+    //     } else {
+    //         item.style.display = 'none';
+    //     }
+    // })
+
+}
+
 
 function checkUi () {
     const list = itemList.querySelectorAll('li');
@@ -96,5 +127,7 @@ function checkUi () {
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
+filter.addEventListener('input', filterItems)
 
 checkUi();
+
